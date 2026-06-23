@@ -1,0 +1,625 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Segoe UI', sans-serif;
+}
+
+body {
+    background: #f7f7f2;
+    overflow-x: hidden;
+}
+/* ========================= */ /* NAVBAR */ /* ========================= */
+
+.navbar-custom {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    padding: 25px 80px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: transparent;
+    z-index: 1000;
+}
+
+.logo img {
+    height: 130px;
+    width: auto;
+    display: block;
+    margin-left: 15px;
+}
+
+nav {
+    display: flex;
+    gap: 35px;
+}
+
+    nav a {
+        text-decoration: none;
+        color: white;
+        font-weight: 600;
+        transition: .3s;
+    }
+
+        nav a:hover {
+            color: #D97334;
+        }
+
+.login-btn {
+    background: #D97334;
+    color: white;
+    padding: 12px 28px;
+    border-radius: 30px;
+    text-decoration: none;
+    font-weight: 600;
+    transition: .3s;
+}
+
+    .login-btn:hover {
+        background: #c86428;
+    }
+/* ========================= */ /* HERO */ /* ========================= */
+
+.hero {
+    position: relative;
+    min-height: 100vh;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    padding: 0 80px;
+}
+
+.hero-slider {
+    position: absolute;
+    inset: 0;
+    z-index: -2;
+}
+
+    .hero-slider img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        transition: 1s;
+    }
+
+.hero::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: rgba(0,0,0,.25);
+    z-index: -1;
+}
+
+.hero-content {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.hero-text {
+    width: 55%;
+}
+
+    .hero-text h1 {
+        font-size: 70px;
+        color: white;
+        font-weight: 800;
+        line-height: 1.05;
+        text-shadow: 0 4px 20px rgba(0,0,0,.35);
+    }
+
+    .hero-text span {
+        font-family: 'Caveat', cursive;
+        font-size: 105px;
+        font-weight: 700;
+        color: #D97334;
+        display: block;
+        line-height: .9;
+        margin-top: -10px;
+        text-shadow: 0 4px 15px rgba(0,0,0,.25);
+    }
+
+    .hero-text p {
+        margin-top: 25px;
+        font-size: 24px;
+        color: white;
+        max-width: 650px;
+        line-height: 1.5;
+    }
+
+.hero-buttons {
+    margin-top: 35px;
+}
+
+.btn-primary {
+    background: #D97334;
+    color: white;
+    text-decoration: none;
+    padding: 15px 32px;
+    border-radius: 12px;
+    margin-right: 12px;
+    font-weight: 600;
+    transition: .3s;
+}
+
+    .btn-primary:hover {
+        background: #c86428;
+    }
+
+.btn-secondary {
+    border: 2px solid white;
+    color: white;
+    background: transparent;
+    text-decoration: none;
+    padding: 15px 32px;
+    border-radius: 12px;
+    font-weight: 600;
+    transition: .3s;
+}
+
+    .btn-secondary:hover {
+        background: rgba(255,255,255,.15);
+    }
+/* ========================= */ /* LOGIN */ /* ========================= */
+
+.hero-login {
+    width: 40%;
+    display: flex;
+    justify-content: flex-end;
+}
+
+.login-card {
+    width: 420px;
+    background: rgba(255,255,255,.96);
+    backdrop-filter: blur(15px);
+    padding: 40px;
+    border-radius: 30px;
+    box-shadow: 0 20px 45px rgba(0,0,0,.18);
+}
+
+.login-logo {
+    text-align: center;
+    margin-bottom: 25px;
+}
+
+    .login-logo img {
+        width: 120px;
+        height: auto;
+    }
+
+.login-card h3 {
+    text-align: center;
+    color: #646D34;
+    font-size: 22px;
+    margin-bottom: 25px;
+}
+
+.login-card input {
+    width: 100%;
+    padding: 15px;
+    margin-bottom: 15px;
+    border-radius: 12px;
+    border: 1px solid #ddd;
+    outline: none;
+}
+
+.login-card button {
+    width: 100%;
+    padding: 15px;
+    background: #646D34;
+    color: white;
+    border: none;
+    border-radius: 12px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: .3s;
+}
+
+    .login-card button:hover {
+        opacity: .9;
+    }
+
+.login-card p {
+    margin-top: 15px;
+    text-align: center;
+}
+
+.login-card a {
+    color: #006d8f;
+    text-decoration: none;
+    font-weight: 600;
+}
+/* ========================= */ /* DESTINOS */ /* ========================= */
+
+.destinos {
+    padding: 80px;
+}
+
+    .destinos h2 {
+        font-size: 36px;
+        color: #646D34;
+        margin-bottom: 30px;
+    }
+
+.cards {
+    display: flex;
+    gap: 25px;
+}
+
+.card {
+    flex: 1;
+    background: white;
+    border-radius: 20px;
+    overflow: hidden;
+    box-shadow: 0 10px 25px rgba(0,0,0,.08);
+    transition: .3s;
+}
+
+    .card:hover {
+        transform: translateY(-8px);
+    }
+
+    .card img {
+        width: 100%;
+        height: 240px;
+        object-fit: cover;
+    }
+
+    .card h3 {
+        padding: 15px;
+        color: #646D34;
+    }
+
+    .card p {
+        padding: 0 15px 20px;
+        color: #555;
+    }
+/* ================================= */ /* PAGINA DESTINOS */ /* ================================= */
+
+.destinos-page {
+    padding: 180px 80px 80px;
+    background: #f7f7f2;
+    min-height: 100vh;
+}
+
+.destinos-header {
+    text-align: center;
+    margin-bottom: 60px;
+}
+
+    .destinos-header h1 {
+        font-size: 55px;
+        color: #646D34;
+        margin-bottom: 15px;
+    }
+
+    .destinos-header p {
+        font-size: 20px;
+        color: #555;
+        max-width: 800px;
+        margin: auto;
+    }
+
+.destinos-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 30px;
+}
+
+.destino-card {
+    background: white;
+    border-radius: 25px;
+    overflow: hidden;
+    box-shadow: 0 12px 30px rgba(0,0,0,.08);
+    transition: .3s;
+}
+
+    .destino-card:hover {
+        transform: translateY(-8px);
+    }
+
+    .destino-card img {
+        width: 100%;
+        height: 240px;
+        object-fit: cover;
+    }
+
+    .destino-card h3 {
+        color: #646D34;
+        padding: 20px 20px 10px;
+    }
+
+    .destino-card p {
+        padding: 0 20px;
+        color: #666;
+    }
+
+.destino-btn {
+    display: inline-block;
+    margin: 20px;
+    background: #D97334;
+    color: white;
+    text-decoration: none;
+    padding: 12px 24px;
+    border-radius: 10px;
+    font-weight: 600;
+}
+
+    .destino-btn:hover {
+        background: #c86428;
+    }
+        /* ================================= */
+        /* HERO DESTINOS */
+        /* ================================= */
+
+.destinos-hero {
+    min-height: 85vh;
+    background: linear-gradient(rgba(0,0,0,.45), rgba(0,0,0,.45)), url('/Images/granada.png');
+    background-size: cover;
+    background-position: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+}
+
+        .destinos-overlay {
+            max-width: 900px;
+            color: white;
+            padding: 20px;
+        }
+
+            .destinos-overlay h1 {
+                font-size: 70px;
+                margin-bottom: 15px;
+                font-weight: 800;
+            }
+
+            .destinos-overlay h2 {
+                font-family: 'Caveat', cursive;
+                font-size: 60px;
+                color: #D97334;
+                margin-bottom: 20px;
+                font-weight: 700;
+            }
+
+            .destinos-overlay p {
+                font-size: 22px;
+                line-height: 1.7;
+                margin-bottom: 30px;
+            }
+        /* ================================= */
+        /* BUSCADOR */
+        /* ================================= */
+
+.buscador-destinos {
+    display: flex;
+    align-items: center;
+    max-width: 700px;
+    margin: 0 auto;
+    background: white;
+    border-radius: 60px;
+    padding: 10px;
+    box-shadow: 0 10px 30px rgba(0,0,0,.15);
+}
+
+    .buscador-destinos input {
+        flex: 1;
+        border: none;
+        outline: none;
+        padding: 18px 25px;
+        font-size: 18px;
+        background: transparent;
+    }
+
+    .buscador-destinos button {
+        background: #D97334;
+        color: white;
+        border: none;
+        border-radius: 50px;
+        padding: 18px 40px;
+        font-weight: 600;
+        cursor: pointer;
+    }
+
+                .buscador-destinos button:hover {
+                    background: #c86428;
+                }
+        /* ================================= */
+        /* CATEGORIAS */
+        /* ================================= */
+
+        .categorias-section {
+            padding: 80px;
+            background: white;
+        }
+
+            .categorias-section h2 {
+                text-align: center;
+                color: #646D34;
+                font-size: 40px;
+                margin-bottom: 50px;
+            }
+
+        .categorias-grid {
+            display: grid;
+            grid-template-columns: repeat(6, 1fr);
+            gap: 20px;
+        }
+
+.categoria-card {
+    background: white;
+    border-radius: 20px;
+    padding: 35px 20px;
+    text-align: center;
+    font-size: 40px;
+    cursor: pointer;
+    transition: .3s;
+    box-shadow: 0 5px 15px rgba(0,0,0,.08);
+}
+
+            .categoria-card span {
+                display: block;
+                margin-top: 15px;
+                color: #646D34;
+                font-size: 18px;
+                font-weight: 600;
+            }
+
+            .categoria-card:hover {
+                transform: translateY(-8px);
+                background: #646D34;
+                color: white;
+            }
+
+                .categoria-card:hover span {
+                    color: white;
+                }
+
+             /*líneas decorativas*/
+
+.categorias-section h2 {
+    position: relative;
+    display: inline-block;
+}
+
+    .categorias-section h2::before,
+    .categorias-section h2::after {
+        content: "";
+        position: absolute;
+        top: 50%;
+        width: 120px;
+        height: 2px;
+        background: #646D34;
+    }
+
+    .categorias-section h2::before {
+        right: 100%;
+        margin-right: 20px;
+    }
+
+    .categorias-section h2::after {
+        left: 100%;
+        margin-left: 20px;
+    }
+
+/*hover de imágenes*/
+
+.destino-card img {
+    transition: .4s;
+}
+
+.destino-card:hover img {
+    transform: scale(1.05);
+}
+
+/*centrando la line de explorar*/
+
+.categorias-section {
+    text-align: center;
+}
+
+    .categorias-section h2 {
+        position: relative;
+        display: inline-block;
+        margin-bottom: 50px;
+    }
+
+/* ================================= */
+/* DETALLE DESTINOS */
+/* ================================= */
+
+.destino-detalle {
+    padding-top: 180px;
+    min-height: 100vh;
+    background: #f7f7f2;
+}
+
+.destino-banner img {
+    width: 100%;
+    height: 500px;
+    object-fit: cover;
+}
+
+.destino-info {
+    max-width: 1000px;
+    margin: auto;
+    padding: 60px 30px;
+}
+
+    .destino-info h1 {
+        color: #646D34;
+        font-size: 55px;
+        margin-bottom: 25px;
+    }
+
+    .destino-info h2 {
+        color: #D97334;
+        margin-top: 30px;
+        margin-bottom: 20px;
+    }
+
+    .destino-info p {
+        font-size: 20px;
+        line-height: 1.8;
+        color: #555;
+    }
+
+    .destino-info ul {
+        margin-top: 20px;
+        padding-left: 25px;
+    }
+
+    .destino-info li {
+        margin-bottom: 10px;
+        font-size: 18px;
+    }
+
+/* ========================= */
+/* GALERIA DESTINOS */
+/* ========================= */
+
+.destino-galeria {
+    padding: 40px 80px 80px;
+}
+
+    .destino-galeria h2 {
+        text-align: center;
+        color: #646D34;
+        margin-bottom: 30px;
+        margin-top: 50px;
+        font-size: 40px;
+    }
+
+.galeria-grid {
+    display: grid;
+    grid-template-columns: repeat(4,1fr);
+    gap: 25px;
+}
+
+.galeria-card {
+    background: white;
+    border-radius: 20px;
+    overflow: hidden;
+    box-shadow: 0 5px 15px rgba(0,0,0,.08);
+    transition: .3s;
+}
+
+    .galeria-card:hover {
+        transform: translateY(-8px);
+    }
+
+    .galeria-card img {
+        width: 100%;
+        height: 250px;
+        object-fit: cover;
+    }
+
+    .galeria-card h3 {
+        padding: 15px;
+        text-align: center;
+        color: #646D34;
+    }

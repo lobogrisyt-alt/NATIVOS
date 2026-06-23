@@ -1,0 +1,114 @@
+﻿@{
+    ViewData["Title"] = "Inicio";
+}
+
+<section class="hero">
+
+    
+    <div class="hero-slider">
+        <img id="sliderImage" src="/images/granada.png" alt="Nicaragua">
+    </div>
+
+    <div class="hero-content">
+
+        <div class="hero-text">
+
+            <h1>
+                Conecta con <br />
+                <span>lo auténtico</span>
+            </h1>
+
+            <p>
+                Descubre destinos únicos, experiencias inolvidables y la magia de nuestra tierra.
+            </p>
+
+            <div class="hero-buttons">
+                <a asp-controller="Destinos"
+                   asp-action="Index"
+                   class="btn-primary">
+                    Explorar destinos
+                </a>
+                <a href="#" class="btn-secondary">Conoce más</a>
+            </div>
+
+        </div>
+
+        <div class="hero-login">
+
+            <div class="login-card">
+
+                <h3>¡Bienvenido!</h3>
+
+                <input type="email" placeholder="Correo electrónico" />
+
+                <input type="password" placeholder="Contraseña" />
+
+                <button>Iniciar sesión</button>
+
+                <p>
+                    ¿No tienes cuenta?
+                    <a href="#">Regístrate aquí</a>
+                </p>
+
+            </div>
+
+        </div>
+
+    </div>
+    
+
+</section>
+
+<section class="destinos">
+
+    
+    <h2>Destinos populares</h2>
+
+    <div class="cards">
+
+        <div class="card">
+            <img src="/images/granada.png" alt="Granada">
+            <h3>Granada</h3>
+            <p>Ciudad colonial llena de historia.</p>
+        </div>
+
+        <div class="card">
+            <img src="/images/leon.png" alt="León">
+            <h3>León</h3>
+            <p>Cultura, tradición y arquitectura.</p>
+        </div>
+
+        <div class="card">
+            <img src="/images/ometepe.png" alt="Ometepe">
+            <h3>La Isla de Ometepe</h3>
+            <p>La isla más hermosa de Nicaragua.</p>
+        </div>
+
+    </div>
+    
+
+</section>
+
+<script>
+
+    const images = [
+        "/images/granada.png",
+        "/images/ometepe.png",
+        "/images/leon.png"
+    ];
+
+    let current = 0;
+
+    setInterval(() => {
+
+        current++;
+
+        if (current >= images.length) {
+            current = 0;
+        }
+
+        document.getElementById("sliderImage").src = images[current];
+
+    }, 5000);
+
+</script>

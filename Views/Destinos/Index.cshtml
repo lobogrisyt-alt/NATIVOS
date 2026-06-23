@@ -1,0 +1,178 @@
+﻿@{
+    ViewData["Title"] = "Destinos";
+}
+
+<section class="destinos-hero">
+
+    <div class="destinos-overlay">
+
+        <h1>Explora Nicaragua</h1>
+
+        <h2>Destinos únicos, cultura y aventura</h2>
+
+        <p>
+            Descubre volcanes impresionantes, playas paradisíacas,
+            ciudades coloniales y experiencias inolvidables.
+        </p>
+
+        <form class="buscador-destinos">
+
+            <input type="text"
+                   id="buscarDestino"
+                   placeholder="Buscar destino..." />
+
+            <button type="button"
+                    onclick="buscarDestino()">
+                Buscar
+            </button>
+
+        </form>
+    </div>
+
+</section>
+
+<section class="categorias-section">
+
+    <h2>Explora por categoría</h2>
+
+    <div class="categorias-grid">
+
+        <div class="categoria-card">
+            🌋
+            <span>Volcanes</span>
+        </div>
+
+        <div class="categoria-card">
+            🏝️
+            <span>Playas</span>
+        </div>
+
+        <div class="categoria-card">
+            ☕
+            <span>Café</span>
+        </div>
+
+        <div class="categoria-card">
+            🏛️
+            <span>Cultura</span>
+        </div>
+
+        <div class="categoria-card">
+            🌿
+            <span>Naturaleza</span>
+        </div>
+
+        <div class="categoria-card">
+            🚣
+            <span>Aventura</span>
+        </div>
+
+    </div>
+
+</section>
+
+<section class="destinos-page">
+
+    <div class="destinos-header">
+
+        <h1>Destinos Populares</h1>
+
+        <p>
+            Conoce algunos de los lugares más visitados de Nicaragua.
+        </p>
+
+    </div>
+
+    <div class="destinos-grid">
+
+        <div class="destino-card">
+            <img src="/Images/granada-portada.jpg" alt="Granada">
+            <h3>Granada</h3>
+            <p>Ciudad colonial llena de historia y arquitectura.</p>
+            <a href="/Destinos/Granada" class="destino-btn">Ver más</a>
+        </div>
+
+        <div class="destino-card">
+            <img src="/Images/leon-portada.jpg" alt="León">
+            <h3>León</h3>
+            <p>Cultura, arte y tradiciones nicaragüenses.</p>
+            <a href="/Destinos/Leon" class="destino-btn">Ver más</a>
+        </div>
+
+        <div class="destino-card">
+            <img src="/Images/ometepe-portada.jpg" alt="Ometepe">
+            <h3>Ometepe</h3>
+            <p>La isla volcánica más famosa de Nicaragua.</p>
+            <a href="/Destinos/Ometepe" class="destino-btn">Ver más</a>
+        </div>
+
+        <div class="destino-card">
+            <img src="/Images/sanjuan-portada.jpg" alt="San Juan del Sur">
+            <h3>San Juan del Sur</h3>
+            <p>Playas paradisíacas y atardeceres increíbles.</p>
+            <a href="/Destinos/SanJuan" class="destino-btn">Ver más</a>
+        </div>
+
+        <div class="destino-card">
+            <img src="/Images/matagalpa-portada.jpg" alt="Matagalpa">
+            <h3>Matagalpa</h3>
+            <p>Montañas, café y clima fresco.</p>
+            <a href="/Destinos/Matagalpa" class="destino-btn">Ver más</a>
+        </div>
+
+        <div class="destino-card">
+            <img src="/Images/cornisland-portada.jpg" alt="Corn Island">
+            <h3>Corn Island</h3>
+            <p>El paraíso caribeño de Nicaragua.</p>
+            <a href="/Destinos/CornIsland" class="destino-btn">Ver más</a>
+        </div>
+
+    </div>
+
+</section>
+
+
+
+<script>
+
+    function buscarDestino() {
+
+        var destino = document.getElementById("buscarDestino").value
+            .toLowerCase()
+            .trim();
+
+        switch(destino) {
+
+            case "granada":
+                window.location.href = "/Destinos/Granada";
+                break;
+
+            case "leon":
+            case "león":
+                window.location.href = "/Destinos/Leon";
+                break;
+
+            case "ometepe":
+                window.location.href = "/Destinos/Ometepe";
+                break;
+
+            case "san juan":
+            case "san juan del sur":
+                window.location.href = "/Destinos/SanJuan";
+                break;
+
+            case "matagalpa":
+                window.location.href = "/Destinos/Matagalpa";
+                break;
+
+            case "corn":
+            case "corn island":
+                window.location.href = "/Destinos/CornIsland";
+                break;
+
+            default:
+                alert("Destino no encontrado");
+        }
+    }
+
+</script>
