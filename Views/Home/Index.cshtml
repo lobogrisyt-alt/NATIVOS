@@ -6,7 +6,7 @@
 
     
     <div class="hero-slider">
-        <img id="sliderImage" src="/images/granada.png" alt="Nicaragua">
+        <img id="sliderImage" src="/images/granada-portada.jpg" alt="Nicaragua">
     </div>
 
     <div class="hero-content">
@@ -39,11 +39,23 @@
 
                 <h3>¡Bienvenido!</h3>
 
-                <input type="email" placeholder="Correo electrónico" />
+                <form asp-controller="Home" asp-action="Login" method="post">
 
-                <input type="password" placeholder="Contraseña" />
+                    <input type="email"
+                           name="correo"
+                           placeholder="Correo electrónico"
+                           required />
 
-                <button>Iniciar sesión</button>
+                    <input type="password"
+                           name="contrasena"
+                           placeholder="Contraseña"
+                           required />
+
+                    <button type="submit">
+                        Iniciar sesión
+                    </button>
+
+                </form>
 
                 <p>
                     ¿No tienes cuenta?
@@ -67,7 +79,7 @@
     <div class="cards">
 
         <div class="card">
-            <img src="/images/granada.png" alt="Granada">
+            <img src="/images/granada.jpg" alt="Granada">
             <h3>Granada</h3>
             <p>Ciudad colonial llena de historia.</p>
         </div>
@@ -92,7 +104,7 @@
 <script>
 
     const images = [
-        "/images/granada.png",
+        "/images/granada-portada.jpg",
         "/images/ometepe.png",
         "/images/leon.png"
     ];
