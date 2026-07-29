@@ -1,0 +1,36 @@
+﻿@{
+    ViewData["Title"] = "Recuperar contraseña";
+}
+
+<section class="login-page">
+
+    <div class="login-container">
+
+        <h1>Recuperar contraseña</h1>
+
+        <p class="text-center mb-4">
+            Ingresa tu correo electrónico y te enviaremos instrucciones para recuperar tu cuenta.
+        </p>
+
+        <form>
+
+            <input type="email"
+                   placeholder="Correo electrónico"
+                   required />
+
+            <button type="submit">
+                Enviar
+            </button>
+
+            <p class="back-login">
+                <a asp-controller="Home"
+                   asp-action="Login">
+                    ← Regresar al inicio de sesión
+                </a>
+            </p>
+
+        </form>
+
+    </div>
+
+</section>

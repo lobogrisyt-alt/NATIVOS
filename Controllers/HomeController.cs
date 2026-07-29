@@ -23,6 +23,25 @@ namespace NATIVOS.Controllers
             return View();
         }
 
+        public IActionResult Login()
+        {
+            return View();
+        }
+        public IActionResult RecuperarContrasena()
+        {
+            return View();
+        }
+
+        public IActionResult Registro()
+        {
+            return View();
+        }
+
+        public IActionResult Registro2()
+        {
+            return View();
+        }
+
         [HttpPost]
         public IActionResult Login(string correo, string contrasena)
         {
