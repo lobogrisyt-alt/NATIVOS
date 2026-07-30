@@ -1,8 +1,13 @@
+using Microsoft.EntityFrameworkCore;
+using NATIVOS.Data;
+
 var builder = WebApplication.CreateBuilder(args);
 
-// Add services to the container.
-builder.Services.AddControllersWithViews();
+// Cadena de conexión a SQL Server
+builder.Services.AddDbContext<NATIVOSContext>(options =>
+    options.UseSqlServer(builder.Configuration.GetConnectionString("ConexionDB")));
 
+builder.Services.AddControllersWithViews();
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.

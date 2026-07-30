@@ -43,6 +43,31 @@ namespace NATIVOS.Controllers
         }
 
         [HttpPost]
+        public IActionResult Registro2(string nombre, string correo, string contrasena)
+        {
+            string conexion = _configuration.GetConnectionString("ConexionDB");
+
+            using (SqlConnection cn = new SqlConnection(conexion))
+            {
+                cn.Open();
+
+                SqlCommand cmd = new SqlCommand(
+                    @"INSERT INTO Usuarios
+              (Nombre, Correo, Contrasena)
+              VALUES
+              (@nombre,@correo,@contrasena)", cn);
+
+                cmd.Parameters.AddWithValue("@nombre", nombre);
+                cmd.Parameters.AddWithValue("@correo", correo);
+                cmd.Parameters.AddWithValue("@contrasena", contrasena);
+
+                cmd.ExecuteNonQuery();
+            }
+
+            return RedirectToAction("Login");
+        }
+
+        [HttpPost]
         public IActionResult Login(string correo, string contrasena)
         {
             string conexion = _configuration.GetConnectionString("ConexionDB");

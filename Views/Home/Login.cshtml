@@ -20,43 +20,37 @@
 
             <h1>Inicia sesión</h1>
 
-            <form>
+            <form asp-controller="Home" asp-action="Login" method="post">
 
                 <div class="input-group">
-
                     <i class="bi bi-envelope"></i>
 
                     <input type="email"
+                           name="correo"
                            placeholder="Correo electrónico"
                            required />
-
                 </div>
 
                 <div class="input-group">
-
                     <i class="bi bi-lock"></i>
 
                     <input type="password"
+                           name="contrasena"
                            placeholder="Contraseña"
                            required />
-
                 </div>
 
                 <div class="forgot-container">
-
                     <a asp-controller="Home"
                        asp-action="RecuperarContrasena"
                        class="forgot-password">
                         ¿Olvidaste tu contraseña?
                     </a>
-
                 </div>
 
                 <button type="submit">
                     Ingresar
                 </button>
-                
-                
 
             </form>
 

@@ -8,5 +8,17 @@ namespace NATIVOS.Controllers
         {
             return View();
         }
+
+        // Mapa interactivo
+        public IActionResult Mapa(string lugar)
+        {
+            ViewBag.Lugar = lugar;
+            return View();
+        }
+        public IActionResult Reservar(string lugar)
+        {
+            ViewBag.Lugar = lugar;
+            return View();
+        }
     }
 }

@@ -1,0 +1,184 @@
+﻿@{
+    ViewData["Title"] = "Reservar";
+    var lugar = (ViewBag.Lugar ?? "").ToString();
+}
+
+<style>
+
+    body {
+        background-image: url('/Images/Fondo-reserva.jpg');
+        background-size: cover;
+        background-position: center;
+        background-repeat: no-repeat;
+        background-attachment: fixed;
+    }
+
+    .contenedor-reserva {
+        max-width: 800px;
+        margin: 50px auto 40px auto;
+        background: white;
+        padding: 35px;
+        border-radius: 15px;
+        box-shadow: 0 8px 20px rgba(0,0,0,.15);
+    }
+
+    h1 {
+        text-align: center;
+        color: #5d6d1d;
+        margin-bottom: 30px;
+    }
+
+    .form-group {
+        margin-bottom: 20px;
+    }
+
+    label {
+        font-weight: bold;
+        display: block;
+        margin-bottom: 8px;
+    }
+
+    input, select, textarea {
+        width: 100%;
+        padding: 12px;
+        border: 1px solid #ccc;
+        border-radius: 8px;
+        font-size: 16px;
+    }
+
+    textarea {
+        resize: none;
+        height: 120px;
+    }
+
+    .btn-confirmar {
+        width: 100%;
+        padding: 15px;
+        background: #D97334;
+        color: white;
+        border: none;
+        border-radius: 8px;
+        font-size: 18px;
+        font-weight: bold;
+        cursor: pointer;
+        transition: .3s;
+    }
+
+        .btn-confirmar:hover {
+            background: #D97334;
+        }
+
+    .btn-volver {
+        display: block;
+        text-align: center;
+        margin-top: 20px;
+        text-decoration: none;
+        color: #5d6d1d;
+        font-weight: bold;
+    }
+
+</style>
+
+<div class="contenedor-reserva">
+
+    <h1>Reservar Experiencia</h1>
+
+    <form>
+
+        <div class="form-group">
+
+            <label>Destino</label>
+
+            <input type="text"
+                   value="@lugar"
+                   readonly />
+
+        </div>
+
+        <div class="form-group">
+
+            <label>Nombre</label>
+
+            <input type="text"
+                   placeholder="Ingrese su nombre" />
+
+        </div>
+
+        <div class="form-group">
+
+            <label>Apellido</label>
+
+            <input type="text"
+                   placeholder="Ingrese su apellido" />
+
+        </div>
+
+        <div class="form-group">
+
+            <label>Correo</label>
+
+            <input type="email"
+                   placeholder="correo@ejemplo.com" />
+
+        </div>
+
+        <div class="form-group">
+
+            <label>Teléfono</label>
+
+            <input type="tel"
+                   placeholder="8888-8888" />
+
+        </div>
+
+        <div class="form-group">
+
+            <label>Fecha del viaje</label>
+
+            <input type="date" />
+
+        </div>
+
+        <div class="form-group">
+
+            <label>Cantidad de personas</label>
+
+            <select>
+
+                <option>1</option>
+                <option>2</option>
+                <option>3</option>
+                <option>4</option>
+                <option>5</option>
+                <option>6</option>
+
+            </select>
+
+        </div>
+
+        <div class="form-group">
+
+            <label>Observaciones</label>
+
+            <textarea placeholder="Escriba aquí..."></textarea>
+
+        </div>
+
+        <button class="btn-confirmar">
+
+            Confirmar Reserva
+
+        </button>
+
+    </form>
+
+    <a asp-controller="Experiencias"
+       asp-action="Mapa"
+       asp-route-lugar="@lugar"
+       class="btn-volver">
+
+        ← Regresar al mapa
+
+    </a>
+
+</div>
