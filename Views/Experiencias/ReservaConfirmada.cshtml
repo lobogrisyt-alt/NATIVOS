@@ -1,0 +1,102 @@
+﻿@{
+    ViewData["Title"] = "Reserva confirmada";
+}
+
+<style>
+    body {
+        background-image: url('/Images/Fondo-reserva.jpg');
+        background-size: cover;
+        background-position: center;
+        background-repeat: no-repeat;
+        background-attachment: fixed;
+    }
+
+    .confirmacion-container {
+        min-height: 75vh;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        padding: 40px 20px;
+    }
+
+    .confirmacion-card {
+        background: white;
+        max-width: 800px;
+        min-height: 440px;
+        width: 100%;
+        padding: 50px 40px;
+        border-radius: 25px;
+        text-align: center;
+        box-shadow: 0 10px 30px rgba(0, 0, 0, .18);
+    }
+
+    .icono-confirmacion {
+        width: 85px;
+        height: 85px;
+        margin: 0 auto 25px auto;
+        background: #646D34;
+        color: white;
+        border-radius: 50%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        font-size: 45px;
+        font-weight: bold;
+    }
+
+    .confirmacion-card h1 {
+        color: #646D34;
+        margin-bottom: 15px;
+        font-size: 36px;
+    }
+
+    .confirmacion-card p {
+        color: #555;
+        font-size: 18px;
+        line-height: 1.6;
+        margin-bottom: 35px;
+    }
+
+    .btn-destinos {
+        display: inline-block;
+        width: 100%;
+        padding: 15px;
+        background: #D97334;
+        color: white;
+        text-decoration: none;
+        border-radius: 8px;
+        font-size: 18px;
+        font-weight: bold;
+        transition: .3s;
+    }
+
+        .btn-destinos:hover {
+            background: #c46129;
+            color: white;
+        }
+</style>
+
+<div class="confirmacion-container">
+
+    <div class="confirmacion-card">
+
+        <div class="icono-confirmacion">
+            ✓
+        </div>
+
+        <h1>¡Reserva confirmada!</h1>
+
+        <p>
+            Tu reserva fue registrada correctamente.
+            Gracias por confiar en NATIVOS.
+        </p>
+
+        <a asp-controller="Destinos"
+           asp-action="Index"
+           class="btn-destinos">
+            ← Regresar a destinos
+        </a>
+
+    </div>
+
+</div>

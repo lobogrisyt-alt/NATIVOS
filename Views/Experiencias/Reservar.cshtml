@@ -1,4 +1,6 @@
-﻿@{
+﻿@model NATIVOS.Models.Reserva
+
+@{
     ViewData["Title"] = "Reservar";
     var lugar = (ViewBag.Lugar ?? "").ToString();
 }
@@ -15,10 +17,10 @@
 
     .contenedor-reserva {
         max-width: 800px;
-        margin: 50px auto 40px auto;
+        margin: 60px auto 40px auto;
         background: white;
         padding: 35px;
-        border-radius: 15px;
+        border-radius: 20px;
         box-shadow: 0 8px 20px rgba(0,0,0,.15);
     }
 
@@ -77,13 +79,24 @@
         font-weight: bold;
     }
 
+    .text-danger {
+        color: #dc3545;
+        font-size: 14px;
+    }
+
 </style>
 
 <div class="contenedor-reserva">
 
     <h1>Reservar Experiencia</h1>
 
-    <form>
+    <form asp-controller="Experiencias"
+          asp-action="Reservar"
+          method="post">
+
+        @Html.AntiForgeryToken()
+
+        
 
         <div class="form-group">
 
@@ -97,74 +110,113 @@
 
         <div class="form-group">
 
-            <label>Nombre</label>
+            <label asp-for="Nombre">Nombre</label>
 
-            <input type="text"
+            <input asp-for="Nombre"
+                   type="text"
                    placeholder="Ingrese su nombre" />
 
+            <span asp-validation-for="Nombre"
+                  class="text-danger">
+            </span>
+
         </div>
 
         <div class="form-group">
 
-            <label>Apellido</label>
+            <label asp-for="Apellido">Apellido</label>
 
-            <input type="text"
+            <input asp-for="Apellido"
+                   type="text"
                    placeholder="Ingrese su apellido" />
 
+            <span asp-validation-for="Apellido"
+                  class="text-danger">
+            </span>
+
         </div>
 
         <div class="form-group">
 
-            <label>Correo</label>
+            <label asp-for="Correo">Correo</label>
 
-            <input type="email"
+            <input asp-for="Correo"
+                   type="email"
                    placeholder="correo@ejemplo.com" />
 
+            <span asp-validation-for="Correo"
+                  class="text-danger">
+            </span>
+
         </div>
 
         <div class="form-group">
 
-            <label>Teléfono</label>
+            <label asp-for="Telefono">Teléfono</label>
 
-            <input type="tel"
+            <input asp-for="Telefono"
+                   type="tel"
                    placeholder="8888-8888" />
 
-        </div>
-
-        <div class="form-group">
-
-            <label>Fecha del viaje</label>
-
-            <input type="date" />
+            <span asp-validation-for="Telefono"
+                  class="text-danger">
+            </span>
 
         </div>
 
         <div class="form-group">
 
-            <label>Cantidad de personas</label>
+            <label asp-for="FechaVisita">Fecha del viaje</label>
 
-            <select>
+            <input asp-for="FechaVisita"
+                   type="date" />
 
-                <option>1</option>
-                <option>2</option>
-                <option>3</option>
-                <option>4</option>
-                <option>5</option>
-                <option>6</option>
+            <span asp-validation-for="FechaVisita"
+                  class="text-danger">
+            </span>
+
+        </div>
+
+        <div class="form-group">
+
+            <label asp-for="CantidadPersonas">
+                Cantidad de personas
+            </label>
+
+            <select asp-for="CantidadPersonas">
+
+                <option value="1">1</option>
+                <option value="2">2</option>
+                <option value="3">3</option>
+                <option value="4">4</option>
+                <option value="5">5</option>
+                <option value="6">6</option>
 
             </select>
 
+            <span asp-validation-for="CantidadPersonas"
+                  class="text-danger">
+            </span>
+
         </div>
 
         <div class="form-group">
 
-            <label>Observaciones</label>
+            <label asp-for="Observaciones">
+                Observaciones
+            </label>
 
-            <textarea placeholder="Escriba aquí..."></textarea>
+            <textarea asp-for="Observaciones"
+                      placeholder="Escriba aquí..."></textarea>
+
+            <span asp-validation-for="Observaciones"
+                  class="text-danger">
+            </span>
 
         </div>
 
-        <button class="btn-confirmar">
+        <button type="submit"
+                class="btn-confirmar">
 
             Confirmar Reserva
 
@@ -182,3 +234,4 @@
     </a>
 
 </div>
+

@@ -27,6 +27,7 @@ namespace NATIVOS.Controllers
         {
             return View();
         }
+
         public IActionResult RecuperarContrasena()
         {
             return View();
@@ -42,24 +43,69 @@ namespace NATIVOS.Controllers
             return View();
         }
 
+        // =========================
+        // REGISTRO DE USUARIO
+        // =========================
         [HttpPost]
-        public IActionResult Registro2(string nombre, string correo, string contrasena)
+        public IActionResult Registro2(
+            string nombre,
+            string primerApellido,
+            string segundoApellido,
+            string celular,
+            string correo,
+            string fechaNacimiento,
+            string sexo,
+            string contrasena,
+            string confirmarContrasena)
         {
+            // Verificar que las contraseñas coincidan
+            if (contrasena != confirmarContrasena)
+            {
+                return Content("Las contraseñas no coinciden.");
+            }
+
+            // Unimos primer y segundo apellido
+            string apellido = primerApellido;
+
+            if (!string.IsNullOrWhiteSpace(segundoApellido))
+            {
+                apellido += " " + segundoApellido;
+            }
+
             string conexion = _configuration.GetConnectionString("ConexionDB");
 
             using (SqlConnection cn = new SqlConnection(conexion))
             {
                 cn.Open();
 
+                // Verificar si el correo ya existe
+                SqlCommand verificar = new SqlCommand(
+                    "SELECT COUNT(*) FROM Usuarios WHERE Correo = @correo",
+                    cn);
+
+                verificar.Parameters.AddWithValue("@correo", correo);
+
+                int existe = Convert.ToInt32(verificar.ExecuteScalar());
+
+                if (existe > 0)
+                {
+                    return Content("Este correo ya está registrado.");
+                }
+
+                // Insertar nuevo usuario
                 SqlCommand cmd = new SqlCommand(
                     @"INSERT INTO Usuarios
-              (Nombre, Correo, Contrasena)
-              VALUES
-              (@nombre,@correo,@contrasena)", cn);
+                    (Nombre, Apellido, Correo, PasswordHash, Rol, FechaRegistro, Estado)
+                    VALUES
+                    (@nombre, @apellido, @correo, @passwordHash, @rol, GETDATE(), @estado)",
+                    cn);
 
                 cmd.Parameters.AddWithValue("@nombre", nombre);
+                cmd.Parameters.AddWithValue("@apellido", apellido);
                 cmd.Parameters.AddWithValue("@correo", correo);
-                cmd.Parameters.AddWithValue("@contrasena", contrasena);
+                cmd.Parameters.AddWithValue("@passwordHash", contrasena);
+                cmd.Parameters.AddWithValue("@rol", "Comunidad");
+                cmd.Parameters.AddWithValue("@estado", "Activo");
 
                 cmd.ExecuteNonQuery();
             }
@@ -67,6 +113,9 @@ namespace NATIVOS.Controllers
             return RedirectToAction("Login");
         }
 
+        // =========================
+        // LOGIN
+        // =========================
         [HttpPost]
         public IActionResult Login(string correo, string contrasena)
         {
@@ -76,41 +125,32 @@ namespace NATIVOS.Controllers
             {
                 cn.Open();
 
+                // Buscar usuario por correo y contraseña
                 SqlCommand buscar = new SqlCommand(
-                    "SELECT IdUsuario FROM Usuarios WHERE Correo = @correo",
+                    @"SELECT IdUsuario
+                      FROM Usuarios
+                      WHERE Correo = @correo
+                      AND PasswordHash = @passwordHash
+                      AND Estado = 1",
                     cn);
 
                 buscar.Parameters.AddWithValue("@correo", correo);
+                buscar.Parameters.AddWithValue("@passwordHash", contrasena);
 
                 object resultado = buscar.ExecuteScalar();
 
-                int idUsuario;
-
+                // Si no existe la cuenta
                 if (resultado == null)
                 {
-                    SqlCommand insertar = new SqlCommand(
-                        @"INSERT INTO Usuarios
-                        (Nombre, Correo, Contrasena)
-                        VALUES
-                        (@nombre, @correo, @contrasena);
-
-                        SELECT SCOPE_IDENTITY();",
-                        cn);
-
-                    insertar.Parameters.AddWithValue("@nombre", correo);
-                    insertar.Parameters.AddWithValue("@correo", correo);
-                    insertar.Parameters.AddWithValue("@contrasena", contrasena);
-
-                    idUsuario = Convert.ToInt32(insertar.ExecuteScalar());
-                }
-                else
-                {
-                    idUsuario = Convert.ToInt32(resultado);
+                    return Content("Correo o contraseña incorrectos. Si no tienes una cuenta, debes registrarte primero.");
                 }
 
+                int idUsuario = Convert.ToInt32(resultado);
+
+                // Registrar el inicio de sesión
                 SqlCommand historial = new SqlCommand(
                     @"INSERT INTO HistorialInicioSesion(IdUsuario)
-                    VALUES(@id)",
+                      VALUES(@id)",
                     cn);
 
                 historial.Parameters.AddWithValue("@id", idUsuario);
@@ -125,7 +165,10 @@ namespace NATIVOS.Controllers
             return View();
         }
 
-        [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
+        [ResponseCache(
+            Duration = 0,
+            Location = ResponseCacheLocation.None,
+            NoStore = true)]
         public IActionResult Error()
         {
             return View(new ErrorViewModel

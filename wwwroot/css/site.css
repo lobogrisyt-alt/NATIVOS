@@ -357,7 +357,7 @@ nav {
 
 .destinos-hero {
     min-height: 85vh;
-    background: linear-gradient(rgba(0,0,0,.45), rgba(0,0,0,.45)), url('/Images/granada.png');
+    background: linear-gradient(rgba(0,0,0,.45), rgba(0,0,0,.45)), url('/Images/Destino-principal.jpg');
     background-size: cover;
     background-position: center;
     display: flex;

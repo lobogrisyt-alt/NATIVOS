@@ -6,8 +6,6 @@
 
     <div class="login-frame">
 
-    
-
         <div class="login-container">
 
             <h1>Crear cuenta</h1>
@@ -20,13 +18,16 @@
                        required />
 
                 <input type="text"
+                       name="primerApellido"
                        placeholder="Primer apellido"
                        required />
 
                 <input type="text"
+                       name="segundoApellido"
                        placeholder="Segundo apellido" />
 
                 <input type="tel"
+                       name="celular"
                        placeholder="Número de celular"
                        required />
 
@@ -36,12 +37,13 @@
                        required />
 
                 <input type="date"
+                       name="fechaNacimiento"
                        required />
 
-                <select required>
+                <select name="sexo" required>
                     <option value="">Seleccione el sexo</option>
-                    <option>Masculino</option>
-                    <option>Femenino</option>
+                    <option value="Masculino">Masculino</option>
+                    <option value="Femenino">Femenino</option>
                 </select>
 
                 <input type="password"
@@ -50,6 +52,7 @@
                        required />
 
                 <input type="password"
+                       name="confirmarContrasena"
                        placeholder="Confirmar contraseña"
                        required />
 

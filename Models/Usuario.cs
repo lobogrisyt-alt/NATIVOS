@@ -10,14 +10,30 @@ namespace NATIVOS.Models
         public int IdUsuario { get; set; }
 
         [Required]
-        public string Nombre { get; set; }
+        [StringLength(100)]
+        public string Nombre { get; set; } = string.Empty;
 
         [Required]
-        public string Correo { get; set; }
+        [StringLength(100)]
+        public string Apellido { get; set; } = string.Empty;
 
         [Required]
-        public string Contrasena { get; set; }
+        [EmailAddress]
+        [StringLength(150)]
+        public string Correo { get; set; } = string.Empty;
+
+        [Required]
+        [StringLength(255)]
+        public string PasswordHash { get; set; } = string.Empty;
+
+        [Required]
+        [StringLength(50)]
+        public string Rol { get; set; } = "Visitante";
 
         public DateTime FechaRegistro { get; set; }
+
+        [Required]
+        [StringLength(30)]
+        public string Estado { get; set; } = "Activo";
     }
 }
