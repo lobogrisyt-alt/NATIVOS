@@ -1,7 +1,10 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Data.SqlClient;
 using NATIVOS.Models;
+using System;
 using System.Diagnostics;
+using System.Security.Cryptography;
+using System.Text;
 
 namespace NATIVOS.Controllers
 {
@@ -9,6 +12,8 @@ namespace NATIVOS.Controllers
     {
         private readonly ILogger<HomeController> _logger;
         private readonly IConfiguration _configuration;
+
+        public SqlConnection ACTIVO { get; private set; }
 
         public HomeController(
             ILogger<HomeController> logger,
@@ -72,7 +77,15 @@ namespace NATIVOS.Controllers
                 apellido += " " + segundoApellido;
             }
 
-            string conexion = _configuration.GetConnectionString("ConexionDB");
+            // Generar hash de la contraseña
+            string passwordHash = Convert.ToHexString(
+                SHA256.HashData(
+                    Encoding.UTF8.GetBytes(contrasena)
+                )
+            );
+
+            string conexion =
+                _configuration.GetConnectionString("ConexionDB");
 
             using (SqlConnection cn = new SqlConnection(conexion))
             {
@@ -85,7 +98,9 @@ namespace NATIVOS.Controllers
 
                 verificar.Parameters.AddWithValue("@correo", correo);
 
-                int existe = Convert.ToInt32(verificar.ExecuteScalar());
+                int existe = Convert.ToInt32(
+                    verificar.ExecuteScalar()
+                );
 
                 if (existe > 0)
                 {
@@ -97,13 +112,14 @@ namespace NATIVOS.Controllers
                     @"INSERT INTO Usuarios
                     (Nombre, Apellido, Correo, PasswordHash, Rol, FechaRegistro, Estado)
                     VALUES
-                    (@nombre, @apellido, @correo, @passwordHash, @rol, GETDATE(), @estado)",
+                    (@nombre, @apellido, @correo, @passwordHash,
+                     @rol, GETDATE(), @estado)",
                     cn);
 
                 cmd.Parameters.AddWithValue("@nombre", nombre);
                 cmd.Parameters.AddWithValue("@apellido", apellido);
                 cmd.Parameters.AddWithValue("@correo", correo);
-                cmd.Parameters.AddWithValue("@passwordHash", contrasena);
+                cmd.Parameters.AddWithValue("@passwordHash", passwordHash);
                 cmd.Parameters.AddWithValue("@rol", "Comunidad");
                 cmd.Parameters.AddWithValue("@estado", "Activo");
 
@@ -119,30 +135,43 @@ namespace NATIVOS.Controllers
         [HttpPost]
         public IActionResult Login(string correo, string contrasena)
         {
-            string conexion = _configuration.GetConnectionString("ConexionDB");
+            string conexion =
+                _configuration.GetConnectionString("ConexionDB");
+
+            // Generar el mismo hash utilizado durante el registro
+            string passwordHash = Convert.ToHexString(
+                SHA256.HashData(
+                    Encoding.UTF8.GetBytes(contrasena)
+                )
+            );
 
             using (SqlConnection cn = new SqlConnection(conexion))
             {
                 cn.Open();
 
-                // Buscar usuario por correo y contraseña
                 SqlCommand buscar = new SqlCommand(
                     @"SELECT IdUsuario
                       FROM Usuarios
                       WHERE Correo = @correo
                       AND PasswordHash = @passwordHash
-                      AND Estado = 1",
+                      AND Estado = 'Activo'",
                     cn);
 
                 buscar.Parameters.AddWithValue("@correo", correo);
-                buscar.Parameters.AddWithValue("@passwordHash", contrasena);
+                buscar.Parameters.AddWithValue(
+                    "@passwordHash",
+                    passwordHash
+                );
 
                 object resultado = buscar.ExecuteScalar();
 
-                // Si no existe la cuenta
+                // Usuario no encontrado
                 if (resultado == null)
                 {
-                    return Content("Correo o contraseña incorrectos. Si no tienes una cuenta, debes registrarte primero.");
+                    return Content(
+                        "Correo o contraseña incorrectos. " +
+                        "Si no tienes una cuenta, debes registrarte primero."
+                    );
                 }
 
                 int idUsuario = Convert.ToInt32(resultado);
@@ -154,6 +183,7 @@ namespace NATIVOS.Controllers
                     cn);
 
                 historial.Parameters.AddWithValue("@id", idUsuario);
+
                 historial.ExecuteNonQuery();
             }
 
@@ -173,7 +203,9 @@ namespace NATIVOS.Controllers
         {
             return View(new ErrorViewModel
             {
-                RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier
+                RequestId =
+                    Activity.Current?.Id ??
+                    HttpContext.TraceIdentifier
             });
         }
     }
